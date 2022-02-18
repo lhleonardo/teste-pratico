@@ -222,6 +222,4 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,linux
 
-.docker/*
 .docker/database_data/*
-!.docker/database_data/.gitkeep

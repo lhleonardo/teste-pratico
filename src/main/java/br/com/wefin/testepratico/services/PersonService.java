@@ -45,7 +45,7 @@ public class PersonService {
         return this.personRepository.findAll();
     }
 
-    public Person getOne(UUID id) {
+    public Person findById(UUID id) {
         var existsPerson = this.personRepository.findById(id);
 
         if (existsPerson.isEmpty()) {

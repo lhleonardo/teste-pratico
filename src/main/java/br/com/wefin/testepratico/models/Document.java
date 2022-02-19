@@ -9,20 +9,22 @@ import br.com.wefin.testepratico.exceptions.InvalidDocumentException;
 
 @Embeddable()
 public class Document {
-    @Column(name = "document_number", nullable = false)
-    private String content;
+    @Column(name = "document_number", nullable = false, unique = true)
+    private String number;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "document_type", nullable = false)
     private DocumentType type;
 
-    public Document(String content, DocumentType type) {
-        this.content = content;
+    public Document(String number, DocumentType type) {
+        this.number = number;
         this.type = type;
     }
 
-    public String getContent() {
-        return content;
+    public Document() {}
+
+    public String getNumber() {
+        return number;
     }
 
     public DocumentType getType() {

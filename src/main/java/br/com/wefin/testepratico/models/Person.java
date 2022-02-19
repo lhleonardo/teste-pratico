@@ -43,4 +43,8 @@ public class Person {
     public String getName() {
         return name;
     }
+
+    public UUID getId() {
+        return id;
+    }
 }

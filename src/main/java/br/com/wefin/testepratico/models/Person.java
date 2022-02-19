@@ -16,13 +16,24 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column()
+    @Column(nullable = false)
     private String name;
 
     @Embedded()
     private Document document;
 
     public Person() {
+    }
+
+    public Person(UUID id, String name, Document document) {
+        this.id = id;
+        this.name = name;
+        this.document = document;
+    }
+
+    public Person(String name, Document document) {
+        this.name = name;
+        this.document = document;
     }
 
     public Document getDocument() {

@@ -8,6 +8,7 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.com.wefin.testepratico.dtos.PersonDTO;
+import br.com.wefin.testepratico.exceptions.DuplicateDocumentException;
 import br.com.wefin.testepratico.models.Document;
 import br.com.wefin.testepratico.models.Person;
 import br.com.wefin.testepratico.repositories.PersonRepository;
@@ -24,6 +25,10 @@ public class PersonService {
     public Person create(PersonDTO dto) {
         Document document = Document.from(dto.getDocumentNumber());
 
+        if (this.checkPersonExists(document)) {
+            throw new DuplicateDocumentException();
+        }
+
         Person newPerson = new Person(dto.getName(), document);
 
         return this.personRepository.save(newPerson);
@@ -36,7 +41,14 @@ public class PersonService {
             throw new EntityNotFoundException("Não existe pessoa cadastrada com o id: " + id);
         }
 
-        var personToUpdate = new Person(id, dto.getName(), Document.from(dto.getDocumentNumber()));
+        Document doc = Document.from(dto.getDocumentNumber());
+        
+        if (this.checkPersonExists(doc)) {
+            throw new DuplicateDocumentException();
+        }
+
+        var personToUpdate = new Person(id, dto.getName(), doc);
+
 
         return this.personRepository.save(personToUpdate);
     }

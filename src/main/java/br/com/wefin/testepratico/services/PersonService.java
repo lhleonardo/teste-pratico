@@ -55,4 +55,20 @@ public class PersonService {
         return existsPerson.get();
     }
 
+    private boolean checkPersonExists(Document document) {
+        List<Person> result = this.personRepository.findByDocument(document);
+
+        return result.size() > 0;
+    }
+
+    public void delete(UUID id) {
+        var existsPerson = this.personRepository.findById(id);
+
+        if (existsPerson.isEmpty()) {
+            throw new EntityNotFoundException("Não existe pessoa cadastrada com o id: " + id);
+        }
+
+        this.personRepository.delete(existsPerson.get());
+    }
+
 }

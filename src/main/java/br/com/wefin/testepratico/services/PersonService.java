@@ -16,6 +16,8 @@ import br.com.wefin.testepratico.repositories.PersonRepository;
 @Service
 public class PersonService {
 
+    private static final String ENTITY_NOT_FOUND_MESSAGE = "Não existe pessoa cadastrada com o id: %s";
+
     private PersonRepository personRepository;
 
     public PersonService(PersonRepository personRepository) {
@@ -38,7 +40,7 @@ public class PersonService {
         var existsPerson = this.personRepository.findById(id);
 
         if (existsPerson.isEmpty()) {
-            throw new EntityNotFoundException("Não existe pessoa cadastrada com o id: " + id);
+            throw new EntityNotFoundException(String.format(ENTITY_NOT_FOUND_MESSAGE, id));
         }
 
         Document doc = Document.from(dto.getDocumentNumber());
@@ -61,7 +63,7 @@ public class PersonService {
         var existsPerson = this.personRepository.findById(id);
 
         if (existsPerson.isEmpty()) {
-            throw new EntityNotFoundException("Não existe pessoa cadastrada com o id: " + id);
+            throw new EntityNotFoundException(String.format(ENTITY_NOT_FOUND_MESSAGE, id));
         }
 
         return existsPerson.get();
@@ -77,7 +79,7 @@ public class PersonService {
         var existsPerson = this.personRepository.findById(id);
 
         if (existsPerson.isEmpty()) {
-            throw new EntityNotFoundException("Não existe pessoa cadastrada com o id: " + id);
+            throw new EntityNotFoundException(String.format(ENTITY_NOT_FOUND_MESSAGE, id));
         }
 
         this.personRepository.delete(existsPerson.get());

@@ -33,6 +33,19 @@ Os métodos de inserção e atualização dos registros de pessoa utilizam o mes
 }
 ```
 
+O formato de retorno do objeto representacional da entidade Pessoa no sistema é dado pelo seguinte esquema: 
+
+```json
+{
+   "id": "some-uuid",
+   "name": "some-name", 
+   "document": {
+      "number": "some-document-number",
+      "type": "CPF | CNPJ"
+   }
+}
+```
+
 ---
 ## Documentação do projeto
 

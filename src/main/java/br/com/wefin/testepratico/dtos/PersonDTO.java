@@ -14,6 +14,15 @@ public class PersonDTO {
     @Size(min = 11, max = 14)
     private String documentNumber;
 
+    public PersonDTO() {
+
+    }
+
+    public PersonDTO(String name, String documentNumber) {
+        this.name = name;
+        this.documentNumber = documentNumber;
+    }
+
     public String getDocumentNumber() {
         return documentNumber;
     }
@@ -21,4 +30,5 @@ public class PersonDTO {
     public String getName() {
         return name;
     }
+
 }

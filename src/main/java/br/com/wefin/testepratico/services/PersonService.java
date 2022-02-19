@@ -1,6 +1,7 @@
 package br.com.wefin.testepratico.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import javax.persistence.EntityNotFoundException;
@@ -27,7 +28,7 @@ public class PersonService {
     public Person create(PersonDTO dto) {
         Document document = Document.from(dto.getDocumentNumber());
 
-        if (this.checkPersonExists(document)) {
+        if (this.documentAlreadyExists(document).isPresent()) {
             throw new DuplicateDocumentException();
         }
 
@@ -44,13 +45,12 @@ public class PersonService {
         }
 
         Document doc = Document.from(dto.getDocumentNumber());
-        
-        if (this.checkPersonExists(doc)) {
+
+        if (this.documentAlreadyExists(doc).isPresent()) {
             throw new DuplicateDocumentException();
         }
 
         var personToUpdate = new Person(id, dto.getName(), doc);
-
 
         return this.personRepository.save(personToUpdate);
     }
@@ -69,10 +69,8 @@ public class PersonService {
         return existsPerson.get();
     }
 
-    private boolean checkPersonExists(Document document) {
-        List<Person> result = this.personRepository.findByDocument(document);
-
-        return result.size() > 0;
+    public Optional<Person> documentAlreadyExists(Document document) {
+        return this.personRepository.findByDocument(document).stream().findAny();
     }
 
     public void delete(UUID id) {

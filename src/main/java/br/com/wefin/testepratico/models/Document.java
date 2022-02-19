@@ -48,4 +48,10 @@ public class Document {
 
         return new Document(content, length == 11 ? DocumentType.CPF : DocumentType.CNPJ);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.number.equals(((Document) obj).number);
+    }
+
 }

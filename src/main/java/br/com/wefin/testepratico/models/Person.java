@@ -47,4 +47,11 @@ public class Person {
     public UUID getId() {
         return id;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        var other = (Person) obj;
+
+        return this.id.equals(other.id);
+    }
 }

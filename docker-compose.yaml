@@ -11,5 +11,3 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=docker
       - POSTGRES_DB=wefin_pessoas
-    volumes:
-      - ./.docker/database_data/:/var/lib/postgresql/data

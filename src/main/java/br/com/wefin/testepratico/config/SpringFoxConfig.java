@@ -1,7 +1,5 @@
 package br.com.wefin.testepratico.config;
 
-import java.util.Collections;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
